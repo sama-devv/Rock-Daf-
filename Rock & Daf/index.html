@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock & Daf - Home</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <h1 class="logo">🎸 Rock & Daf</h1>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="instruments.html">Instruments</a>
+        <a href="cart.html">Cart</a>
+        <a href="login.html" id="loginLink">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h2>Welcome to Rock & Daf</h2>
+      <p>Discover top-quality musical instruments at unbeatable prices!</p>
+      <a href="instruments.html" class="btn">Shop Now</a>
+    </div>
+  </section>
+
+  <section class="categories">
+    <div class="container">
+      <h3>Shop by Category</h3>
+      <div class="grid">
+        <div class="category-card">🎸 Guitars</div>
+        <div class="category-card">🥁 Drums</div>
+        <div class="category-card">🎹 Keyboards</div>
+        <div class="category-card">🎷 Wind Instruments</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    
+  </footer>
+
+  <script>
+    const currentUser = localStorage.getItem("currentUser");
+    const loginLink = document.getElementById("loginLink");
+    if (currentUser) {
+      loginLink.textContent = "Logout";
+      loginLink.href = "#";
+      loginLink.onclick = function () {
+        localStorage.removeItem("currentUser");
+        window.location.reload();
+      };
+    }
+  </script>
+</body>
+</html>

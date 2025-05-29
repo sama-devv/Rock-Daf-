@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details - Rock & Daf</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <h1 class="logo">🎸 Rock & Daf</h1>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="instruments.html">Instruments</a>
+        <a href="cart.html">Cart</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="product-details">
+    <div class="container" id="productDetail">
+      <!-- Product details will be inserted by JS -->
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Rock & Daf. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const productName = params.get('name');
+    const allProducts = JSON.parse(localStorage.getItem("allProducts")) || [];
+    const product = allProducts.find(p => p.name === productName);
+
+    const detailContainer = document.getElementById("productDetail");
+
+    if (product) {
+      detailContainer.innerHTML = `
+        <div class="product-full">
+          <img src="${product.image}" alt="${product.name}" class="product-image"/>
+          <div class="product-info">
+            <h2>${product.name}</h2>
+            <p><strong>Category:</strong> ${product.category}</p>
+            <p><strong>Description:</strong> ${product.description}</p>
+            <p><strong>Price:</strong> $${product.price}</p>
+            <button onclick='addToCart(${JSON.stringify(product)})'>Add to Cart</button>
+          </div>
+        </div>
+      `;
+    } else {
+      detailContainer.innerHTML = `<p>Product not found.</p>`;
+    }
+
+    function addToCart(product) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push(product);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(`${product.name} added to cart.`);
+    }
+  </script>
+</body>
+</html>
